@@ -1,7 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-// import 'package:player/your_account.dart';
-import 'your_account.dart';
+import 'package:player/free_demo.dart';
+import 'package:player/new_account.dart';
+import 'package:player/your_account.dart';
 
 class login_screen extends StatefulWidget {
   const login_screen({Key? key}) : super(key: key);
@@ -18,13 +19,18 @@ class _login_screenState extends State<login_screen> {
       // debugShowCheckedModeBanner: false,
       appBar: AppBar(
         backgroundColor: Colors.teal,
-        title: Text('welcome'),
+        title: Text('Media Player'),
       actions: [
         IconButton(onPressed: (){
           // Navigator.pop(context);
-          TextField();
+          TextField(decoration: InputDecoration(hintText: 'help'),);
         },
-        icon: Icon(Icons.search_outlined)),
+        icon: Icon(Icons.help_outline_outlined)),
+        IconButton(onPressed: (){
+          // Navigator.pop(context);
+          TextField(decoration: InputDecoration(hintText: 'info'),);
+        },
+            icon: Icon(Icons.info_outline)),
         ],
       ),
       body: LayoutBuilder(
@@ -35,19 +41,15 @@ class _login_screenState extends State<login_screen> {
                 children: [
                   Container(
                     height: 200,
-                    width: 200,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            Colors.purpleAccent.withOpacity(.3),
-                            Colors.pink.withOpacity(.9),
-                          ]
-                      ),
-                      shape: BoxShape.circle,
-                    ),
+                       width: 300,
+                       margin: EdgeInsets.only(top: 5),
+                       decoration: BoxDecoration(
+                  image: DecorationImage(
+                  image: NetworkImage('https://i.pinimg.com/736x/be/79/d0/be79d0c8fb22c9ed3f9962d53dd0849a.jpg'),
+                    fit: BoxFit.fill,
                   ),
+                   ),
+                     ),
                   SizedBox(height: 1),
                   Container(
                     child: Text('LOGIN NOW',style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold)),
@@ -96,17 +98,20 @@ class _login_screenState extends State<login_screen> {
                       ),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton(onPressed: (){},
-                        child: Text('forget password',
-                          style: TextStyle(color: Colors.red,fontSize: 15),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 35),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(onPressed: (){},
+                          child: Text('forget password',
+                            style: TextStyle(color: Colors.red,fontSize: 15),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                  SizedBox(height: 30),
+                  SizedBox(height: 25),
                   Container(
                     height: 50,
                     width: 500,
@@ -123,7 +128,7 @@ class _login_screenState extends State<login_screen> {
                             })
                         );},
                       child: Text(
-                        'Login',style: TextStyle(fontSize: 22),
+                        'Sign In',style: TextStyle(fontSize: 22),
                       ),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.red,
@@ -133,16 +138,43 @@ class _login_screenState extends State<login_screen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 5),
+                  SizedBox(height: 10),
+                  Container(
+                    height: 50,
+                    width: 500,
+                    margin: EdgeInsets.symmetric(horizontal: 40.0),
+                    child: ElevatedButton(onPressed: (){
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (context){
+                            return new_account();
+                      }),
+                      );
+                    },
+                        child: Text('Sign Up',style: TextStyle(fontSize: 22),),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red,
+                        primary: Colors.red,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                      ),
+                    ),
+                  ),
                   RichText(text: TextSpan(
-                      text: 'Dont have an account!',
+                      text: 'Using Without an account!',
                       style: TextStyle(fontSize: 15,color: Colors.black),
                       children: [
                         TextSpan(
-                            text: ' Rigister',
+                            text: ' Free Demo',
                             style: TextStyle(color: Colors.pink,fontSize: 15),
                             recognizer: TapGestureRecognizer()
-                              ..onTap= (){}
+                              ..onTap= (){
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context){
+                                    return free_demo();
+                                  }
+                              ),);
+                              }
                         ),
                       ]
                   ),),
@@ -150,75 +182,78 @@ class _login_screenState extends State<login_screen> {
       drawer: Drawer(
         backgroundColor: Colors.lightGreen,
         width: 250,
-        child: Padding(
-          padding: EdgeInsets.all(2.0),
-          child: ListView(
-              children: [
-                Container(
-                  child: UserAccountsDrawerHeader(
-                    accountName: Text('arslan'), accountEmail: Text('asd123@gmail.com'),
-                    currentAccountPicture: CircleAvatar(
-                      backgroundColor: Colors.pink,
-                      // backgroundImage: Image.asset('images/AI.jpg');
-                      child: Text(
-                        'Ⓐ',style: TextStyle(fontSize: 60,fontWeight: FontWeight.bold),
-                      ),),
-                    currentAccountPictureSize: Size.square(80),
+        child: ListView(
+            children: [
+              Container(
+                child: UserAccountsDrawerHeader(
+                  accountName: Text('arslan'),
+                  accountEmail: Text('asd123@gmail.com'),
+                  currentAccountPicture: CircleAvatar(
+                    child: ClipOval(
+                      child: Image(
+                        image: NetworkImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuT_wu3cGS8vFdoOo0sgabhd1qJGWRpWjOlg&usqp=CAU'),
+                        fit: BoxFit.cover,
+                      ),),),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage('https://images.unsplash.com/photo-1590166805204-edcddb7305c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8ZXZlbmluZyUyMHN1bnxlbnwwfHwwfHw%3D&w=1000&q=80'),
+                   fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-                ListTile(
-                  leading: Icon(Icons.account_circle_rounded),
-                  title: Text('account'),
-                  subtitle: Text('new'),
-                  onTap: (){
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  leading: Icon(Icons.login_outlined),
-                  title: Text('login'),
-                  subtitle: Text('new'),
-                  onTap: (){
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  leading: Icon(Icons.category_outlined),
-                  title: Text('category'),
-                  subtitle: Text('new'),
-                  onTap: (){
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  leading: Icon(Icons.login_outlined),
-                  title: Text('login'),
-                  subtitle: Text('new'),
-                  onTap: (){
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  leading: Icon(Icons.login_outlined),
-                  title: Text('login'),
-                  subtitle: Text('new'),
-                  onTap: (){
-                    Navigator.pop(context);
-                  },
-                ),
-                AboutListTile(
-                  icon: Icon(Icons.info_outline),
-                  child: Text('About App'),
-                  applicationName: 'My Cool App',
-                  applicationIcon: Icon(Icons.local_police_outlined,size: 40,),
-                  applicationVersion: '1.0.25',
-                  applicationLegalese: 'this @ company',
-                  aboutBoxChildren: [
-                    Text('ListView is the most commonly used scrolling widget.'),
-                  ],
-                )
-              ],
-          ),
+              ),
+              ListTile(
+                leading: Icon(Icons.account_circle_rounded),
+                title: Text('account'),
+                subtitle: Text('new'),
+                onTap: (){
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.login_outlined),
+                title: Text('login'),
+                subtitle: Text('new'),
+                onTap: (){
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.category_outlined),
+                title: Text('category'),
+                subtitle: Text('new'),
+                onTap: (){
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.login_outlined),
+                title: Text('login'),
+                subtitle: Text('new'),
+                onTap: (){
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.login_outlined),
+                title: Text('login'),
+                subtitle: Text('new'),
+                onTap: (){
+                  Navigator.pop(context);
+                },
+              ),
+              AboutListTile(
+                icon: Icon(Icons.info_outline),
+                child: Text('About App'),
+                applicationName: 'My Cool App',
+                applicationIcon: Icon(Icons.local_police_outlined,size: 40,),
+                applicationVersion: '1.0.25',
+                applicationLegalese: 'this @ company',
+                aboutBoxChildren: [
+                  Text('ListView is the most commonly used scrolling widget.'),
+                ],
+              ),
+            ],
         ),
       ),
     );

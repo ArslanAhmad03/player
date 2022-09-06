@@ -12,7 +12,30 @@ class your_account extends StatefulWidget {
 class _your_accountState extends State<your_account> {
   @override
   Widget build(BuildContext context) {
-    return login_screen();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        backgroundColor: Colors.lightGreen,
+        appBar: AppBar(
+          backgroundColor: Colors.teal,
+          title: Text('what'),
+          leading: GestureDetector(
+            child: Icon(Icons.arrow_back_ios_new),
+            onTap: (){
+              Navigator.pop(context);
+            },
+          ),
+        ),
+        body: Container(
+          child: Center(
+            child: Icon(
+              Icons.flutter_dash_outlined,size: 80,
+              color: Colors.green,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 
