@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
-import 'login_screen.dart';
+import 'package:get/get.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+import 'main_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: login_screen(),
-    );
+    return ResponsiveSizer(builder: (context, orientation, screenType) {
+      return GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          appBarTheme: AppBarTheme(backgroundColor: Colors.amber.shade300),
+          scaffoldBackgroundColor: Colors.lightGreen,
+          primarySwatch: Colors.teal,
+          useMaterial3: true,
+        ),
+        home: const MainScreen(),
+      );
+    });
   }
 }
-
-
-
-
-
-
-
-
-
-
